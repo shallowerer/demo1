@@ -3,5 +3,5 @@
 ### 技术栈
 1.Spring Boot  
 2.Spring Data + JPA 
-3.MySQL  
+3.MySQL5.1 
 4.Shiro
