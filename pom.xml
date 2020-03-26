@@ -69,13 +69,14 @@
            <scope>test</scope>
      	</dependency>
      	-->
-   
-     	
-     <dependency>
+	
+
+ 		<!-- 实体bean自动映射 -->
+     	<dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.22</version>
- 	 </dependency>
+ 	 	</dependency>
 	</dependencies>
  
 	<build>

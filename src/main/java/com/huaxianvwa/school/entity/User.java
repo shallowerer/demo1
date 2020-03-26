@@ -9,31 +9,31 @@ import lombok.Data;
 @Data
 public class User {
 	@Id
-	private Integer sid;
+	private Integer id;
 	
-	private String uid;
-	private String uname;
-	public Integer getSid() {
-		return sid;
+	private String username;
+	private String mobile;
+	public Integer getId() {
+		return id;
 	}
-	public void setSid(Integer sid) {
-		this.sid = sid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public String getUid() {
-		return uid;
+	public String getUsername() {
+		return username;
 	}
-	public void setUid(String uid) {
-		this.uid = uid;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getUname() {
-		return uname;
+	public String getMobile() {
+		return mobile;
 	}
-	public void setUname(String uname) {
-		this.uname = uname;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 	@Override
 	public String toString() {
-		return "User [sid=" + sid + ", uid=" + uid + ", uname=" + uname + "]";
+		return "User [id=" + id + ", username=" + username + ", mobile=" + mobile + "]";
 	}
 	
 
