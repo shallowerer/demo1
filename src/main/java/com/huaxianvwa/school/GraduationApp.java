@@ -16,8 +16,8 @@ import com.huaxianvwa.school.Factory.BaseRepositoryFactoryBean;
  * 我们需要让spring在加载的时候找到我们自定义的BaseRepositoryFactoryBean的工厂，
  * 只要在入口类中加入@EnableJpaRepositories即可，代码如下
  */
-@EnableJpaRepositories(basePackages = {"com.huaxianvwa.school.repository"},
-repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)//我们自己的工厂
+//@EnableJpaRepositories(basePackages = {"com.huaxianvwa.school.repository"},
+//repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)//我们自己的工厂
 
 @SpringBootApplication
 @Controller

@@ -2,12 +2,23 @@ package com.huaxianvwa.school.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "commodity")
+@JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class Commodity {
+    @ManyToOne
+    @JoinColumn(name="cate_id")
+    private Category category;
+	
 	@Id
 	private Integer id;
 	private String title;

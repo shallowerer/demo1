@@ -17,7 +17,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<fastjson.version>1.2.24</fastjson.version>
@@ -69,7 +69,12 @@
            <scope>test</scope>
      	</dependency>
      	-->
-	
+		<!-- shiro -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.4.0</version>
+		</dependency>
 
  		<!-- 实体bean自动映射 -->
      	<dependency>
@@ -77,6 +82,13 @@
             <artifactId>lombok</artifactId>
             <version>1.16.22</version>
  	 	</dependency>
+ 	 	
+ 	 	<!-- String类型操作方法 -->
+ 	 	<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
 	</dependencies>
  
 	<build>
