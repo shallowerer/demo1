@@ -79,7 +79,7 @@ public class BaseDaoImpl {
 	 * @param arg
 	 * @return
 	 */
-	@SuppressWarnings({ "unchecked", "deprecation" })
+//	@SuppressWarnings({ "unchecked", "deprecation" })
 	public <T> List<T> getList(String sql, Object... arg) {
 		return (List<T>) hibernateTemplate.find(sql, arg);
 	}

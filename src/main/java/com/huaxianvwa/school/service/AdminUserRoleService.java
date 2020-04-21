@@ -22,6 +22,11 @@ public class AdminUserRoleService {
     public List<AdminUserRole> listAllByUid(int uid) {
         return adminUserRoleDAO.findAllByUid(uid);
     }
+    
+    @Transactional
+    public void deleteAllByUid(Integer uid){
+    	adminUserRoleDAO.deleteAllByUid(uid);
+    }
 
 //    @Modifying
     @Transactional

@@ -5,7 +5,7 @@ spring:
     password: zsj1998520.
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true 

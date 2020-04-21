@@ -37,7 +37,10 @@ public class UserService {
             roles = adminRoleService.listRolesByUser(user.getUsername());
             user.setRoles(roles);
         }
-        return users;
+       
+    	
+    	System.out.println(55);
+    	 return users;
     }
 
     public boolean isExist(String username) {
@@ -55,6 +58,11 @@ public class UserService {
 
     public void addOrUpdate(User user) {
         userDAO.save(user);
+    }
+    
+    public void deleteById(Integer id){
+    	adminUserRoleService.deleteAllByUid(id);
+    	userDAO.delete(id);
     }
 
     public int register(User user) {
@@ -134,4 +142,5 @@ public class UserService {
         }
         return true;
     }
+    
 }

@@ -23,16 +23,25 @@ public class AdminRolePermissionService {
     List<AdminRolePermission> findAllByRid(int rid) {
         return adminRolePermissionDAO.findAllByRid(rid);
     }
+    
+    @Transactional
+    public void deleteAllByRid(Integer rid){
+    	adminRolePermissionDAO.deleteAllByRid(rid);
+    }
 
 //    @Modifying
     @Transactional
     public void savePermChanges(int rid, List<AdminPermission> perms) {
         adminRolePermissionDAO.deleteAllByRid(rid);
-        for (AdminPermission perm : perms) {
-            AdminRolePermission rp = new AdminRolePermission();
-            rp.setRid(rid);
-            rp.setPid(perm.getId());
-            adminRolePermissionDAO.save(rp);
-        }
+        if(perms != null){
+	    	for (AdminPermission perm : perms) {
+	            AdminRolePermission rp = new AdminRolePermission();
+	            rp.setRid(rid);
+	            rp.setPid(perm.getId());
+	            adminRolePermissionDAO.save(rp);
+	        }
+        }else {
+        	System.out.println("初设角色暂时没有权限");
+		}
     }
 }

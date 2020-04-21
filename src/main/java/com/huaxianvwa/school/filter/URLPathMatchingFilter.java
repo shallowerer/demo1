@@ -43,7 +43,9 @@ public class URLPathMatchingFilter extends PathMatchingFilter {
         String requestAPI = getPathWithinApplication(request);
 
         Subject subject = SecurityUtils.getSubject();
-//
+
+        
+        // 进行接口调试时可不用此验证
 //        if (!subject.isAuthenticated()) {
 //            System.out.println("需要登录");
 //            return false;

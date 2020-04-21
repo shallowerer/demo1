@@ -32,7 +32,9 @@ public class AdminRoleService {
     AdminRolePermissionService adminRolePermissionService;
     @Autowired
     AdminMenuService adminMenuService;
-
+    @Autowired
+    AdminRoleMenuService adminRoleMenuService;
+    
     public List<AdminRole> list() {
         List<AdminRole> roles = adminRoleDAO.findAll();
         List<AdminPermission> perms;
@@ -70,10 +72,21 @@ public class AdminRoleService {
         return adminRoleDAO.save(roleInDB);
     }
 
-    public boolean editRole(@RequestBody AdminRole requestRole) {
+    public boolean editRole(@RequestBody AdminRole requestRole) {    	
         try {
             adminRoleDAO.save(requestRole);
             adminRolePermissionService.savePermChanges(requestRole.getId(), requestRole.getPerms());
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean delateRoleById(Integer id) {
+        try {
+        	adminRolePermissionService.deleteAllByRid(id);
+        	adminRoleMenuService.deleteAllByRid(id);
+            adminRoleDAO.delete(id);
         } catch (IllegalArgumentException e) {
             return false;
         }
