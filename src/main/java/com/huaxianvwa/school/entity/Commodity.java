@@ -1,6 +1,9 @@
 package com.huaxianvwa.school.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,16 +18,35 @@ import lombok.Data;
 @Table(name = "commodity")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class Commodity {
-    @ManyToOne
+
+	@ManyToOne
     @JoinColumn(name="cate_id")
     private Category category;
 	
-	@Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
 	private Integer id;
 	private String title;
-	private String desc;
+	private String abs;
+	private String sellPrice;
 	private String cover;
+	private String date;
+	private Integer cno;
 	
+    public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -37,11 +59,11 @@ public class Commodity {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getDesc() {
-		return desc;
+	public String getAbs() {
+		return abs;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setAbs(String abs) {
+		this.abs = abs;
 	}
 	public String getCover() {
 		return cover;
@@ -49,10 +71,25 @@ public class Commodity {
 	public void setCover(String cover) {
 		this.cover = cover;
 	}
+	public String getSellPrice() {
+		return sellPrice;
+	}
+	public void setSellPrice(String sellPrice) {
+		this.sellPrice = sellPrice;
+	}
+	public Integer getCno() {
+		return cno;
+	}
+	public void setCno(Integer cno) {
+		this.cno = cno;
+	}
 	@Override
 	public String toString() {
-		return "Commodity [id=" + id + ", title=" + title + ", desc=" + desc + ", cover=" + cover + "]";
+		return "Commodity [category=" + category + ", id=" + id + ", title=" + title + ", abs=" + abs + ", sellPrice="
+				+ sellPrice + ", cover=" + cover + ", date=" + date + ", cno=" + cno + "]";
 	}
+
+
 
 	
 

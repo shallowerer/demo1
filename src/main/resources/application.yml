@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/graduation_project?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/graduation_project?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     username: root
     password: zsj1998520.
     driver-class-name: com.mysql.jdbc.Driver
@@ -9,6 +9,7 @@ spring:
     properties:
       hibernate:
         format_sql: true 
+        ddl-auto: none
 server:
   port: 8899
    

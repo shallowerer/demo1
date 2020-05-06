@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.huaxianvwa.school.dao.CommodityDao;
 import com.huaxianvwa.school.entity.Commodity;
 import com.huaxianvwa.school.repository.CommodityRepository;
 import com.huaxianvwa.school.result.Result;
@@ -32,7 +32,9 @@ public class CommodityController {
 	
 	@Autowired
 	private CommodityService commodityService;
-
+	
+	@Autowired
+	private CommodityDao commodityDao;
 
 //	@Autowired
 //	private BaseDao baseDao;
@@ -40,7 +42,7 @@ public class CommodityController {
 	@GetMapping("/api/findAllCommodity")
 	@ResponseBody
 	public List<Commodity> findAll(){
-		return commodityRe.findAll();
+		return commodityService.list();
 	}
 	
 	@GetMapping("/api/paging/{page}/{size}")
@@ -51,9 +53,9 @@ public class CommodityController {
 
 	
 	
-	@PostMapping("/api/admin/content/books")
+	@PostMapping("/api/admin/content/commodities")
     public Result addOrUpdateCommodities(@RequestBody Commodity commodity) {
-        if(commodityService.addOrUpdate(commodity)) {
+        if(commodityService.addOrUpdate(commodity)) {   	
             return ResultFactory.buildSuccessResult("修改成功");
         }
         return ResultFactory.buildFailResult("参数错误，修改失败");
@@ -85,17 +87,17 @@ public class CommodityController {
         }
     }
 
-    @PostMapping("/api/admin/content/books/covers")
+    @PostMapping("/api/admin/content/commodities/covers")
     public String coversUpload(MultipartFile file) {
-        String folder = "D:/workspace/img";
+        String folder = "D:/workspace/graduration/img";
         File imageFolder = new File(folder);
         File f = new File(imageFolder, file.getOriginalFilename()
-                .substring(file.getOriginalFilename().length() - 4));
+                .substring(file.getOriginalFilename().length() - 7));
         if (!f.getParentFile().exists())
             f.getParentFile().mkdirs();
         try {
             file.transferTo(f);
-            String imgURL = "http://localhost:8443/api/file/" + f.getName();
+            String imgURL = "http://localhost:8899/api/file/" + f.getName();
             return imgURL;
         } catch (IOException e) {
             e.printStackTrace();

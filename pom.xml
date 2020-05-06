@@ -4,7 +4,7 @@
   <groupId>com.huaxianvwa.school</groupId>
   <artifactId>demo1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-<parent>
+	<parent>
         <!-- 依赖管理，引入以后在声明其它dependency的时候就不需要version -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

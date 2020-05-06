@@ -52,7 +52,7 @@ public class UserDaoTest {
 //			
 //		}
 //		List<Commodity> commodities = (List<Commodity>) base.getById(Commodity.class,1);
-		
+
 		System.out.println("555");
 	}
 }
