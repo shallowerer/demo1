@@ -42,6 +42,10 @@ public class UserService {
     	System.out.println(55);
     	 return users;
     }
+    public User getById(Integer id){
+    	User user = userDAO.getOne(id);
+    	return user;
+    }
 
     public boolean isExist(String username) {
         User user = userDAO.findByUsername(username);
@@ -64,6 +68,34 @@ public class UserService {
     	adminUserRoleService.deleteAllByUid(id);
     	userDAO.delete(id);
     }
+    public int setSimpleInfo(User user) {
+    	User u = userDAO.getOne(user.getId());
+    	u.setUsername(user.getUsername());
+    	System.out.println(user.getUsername());
+        u.setPhone(user.getPhone());
+        u.setEmail(user.getEmail());
+//        username = HtmlUtils.htmlEscape(username);
+//        user.setUsername(username);
+//        phone = HtmlUtils.htmlEscape(phone);
+//        user.setPhone(phone);
+//        email = HtmlUtils.htmlEscape(email);
+//        user.setEmail(email);
+//        
+        if (user.getUsername().equals("")) {
+            return 0;
+        }
+
+        boolean exist = isExist(user.getUsername());
+
+		try {
+			 userDAO.save(u);
+		} catch (Exception e) {
+			return 2;
+		}
+		return 1;
+	}
+    
+
 
     public int register(User user) {
         String username = user.getUsername();
@@ -112,6 +144,22 @@ public class UserService {
         } catch (IllegalArgumentException e) {
             return false;
         } return true;
+    }
+    
+    public boolean setPassword(User user) {
+        User userInDB = userDAO.getOne(user.getId());
+        String password = user.getPassword();
+        String salt = new SecureRandomNumberGenerator().nextBytes().toString();
+        int times = 2;
+        userInDB.setSalt(salt);
+        String encodedPassword = new SimpleHash("md5", password, salt, times).toString();
+        userInDB.setPassword(encodedPassword);
+        try {
+            userDAO.save(userInDB);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
     }
 
     public boolean resetPassword(User user) {

@@ -1,5 +1,7 @@
 package com.huaxianvwa.school.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -29,7 +31,8 @@ public class LoginController {
     UserService userService;
 
     @PostMapping("/api/login")
-    public Result login(@RequestBody User requestUser) {
+    public Result login(@RequestBody User requestUser,HttpSession session) {
+    	
         String username = requestUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
 
@@ -43,6 +46,9 @@ public class LoginController {
                 return ResultFactory.buildFailResult("该用户已被禁用");
             }
             subject.login(usernamePasswordToken);
+            session.setAttribute("name", username);
+            User u = userService.findByUsername(username);
+            session.setAttribute("id", u.getId());
             return ResultFactory.buildSuccessResult(usernamePasswordToken);
 
         } catch (IncorrectCredentialsException e) {
