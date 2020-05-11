@@ -20,7 +20,7 @@ public class Category {
     int id;
 
     String name;
-
+    private boolean enabled;
     public int getId() {
         return id;
     }
@@ -34,10 +34,17 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
+		return "Category [id=" + id + ", name=" + name + ", enabled=" + enabled + "]";
 	}
+
     
     
 }

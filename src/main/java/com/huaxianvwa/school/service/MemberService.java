@@ -1,12 +1,16 @@
 package com.huaxianvwa.school.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
 import com.huaxianvwa.school.dao.MemberDAO;
 import com.huaxianvwa.school.entity.Member;
-import com.huaxianvwa.school.entity.User;
+
+
+
 
 @Service
 public class MemberService {
@@ -85,6 +89,34 @@ public class MemberService {
         }
         return true;
     }
+
+	public List<Member> searchMember(Member member) {
+		// TODO 自动生成的方法存根
+		List<Member> members;
+//		System.out.println("truename是否为null"+member.getTruename().toString());
+		if(!(member.getTruename() == null || member.getTruename().length() <= 0)){ // 输入内容可能为null也可能为空串
+			members = memberDAO.findByTruenameLike(member.getTruename());
+			if(members.size() != 0){
+				System.out.println("truename"+members);
+				return members;
+			}
+		}else if(!(member.getMemberno() == null || member.getMemberno().length() <= 0)){
+			members = memberDAO.findByMembernoLike(member.getMemberno());
+			if(members.size() != 0){
+				System.out.println("no"+members);
+				return members;
+			}
+		}else if(!(member.getPhone() == null || member.getPhone().length() <= 0)){
+			members = memberDAO.findByPhoneLike(member.getPhone());
+			System.out.println(member.getPhone());
+			if(members.size() != 0 || members != null){
+//				System.out.println("phone"+members);
+				return members;
+			}
+		}
+		System.out.println("------------null-------");
+		return null;
+	}
 	
 	
 	
