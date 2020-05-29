@@ -8,11 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+/**
+ * @author zsj
+ * @date 2020/3
+ */
 @Entity
-	@Table(name = "category")
-	@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
-
+@Table(name = "category")
+@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

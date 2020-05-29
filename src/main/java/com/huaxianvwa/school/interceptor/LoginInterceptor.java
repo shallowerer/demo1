@@ -1,5 +1,8 @@
 package com.huaxianvwa.school.interceptor;
-
+/**
+ * @author zsj
+ * @date 2020/3
+ */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

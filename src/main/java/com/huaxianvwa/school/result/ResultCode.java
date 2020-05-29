@@ -1,8 +1,8 @@
 package com.huaxianvwa.school.result;
 
 /**
- * @author Evan
- * @date 2019/4
+ * @author zsj
+ * @date 2020/4
  */
 public enum ResultCode {
     SUCCESS(200),

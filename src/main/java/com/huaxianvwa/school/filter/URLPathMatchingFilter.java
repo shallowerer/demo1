@@ -19,8 +19,8 @@ import com.huaxianvwa.school.service.AdminPermissionService;
 import com.huaxianvwa.school.util.SpringContextUtils;
 
 /**
- * @author Evan
- * @date 2019/11
+ * @author zsj
+ * @date 2020/3
  */
 public class URLPathMatchingFilter extends PathMatchingFilter {
     @Autowired

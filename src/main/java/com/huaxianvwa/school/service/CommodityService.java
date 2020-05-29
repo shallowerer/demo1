@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.huaxianvwa.school.dao.CommodityDao;
 import com.huaxianvwa.school.entity.Category;
 import com.huaxianvwa.school.entity.Commodity;
+import com.huaxianvwa.school.entity.Member;
 
 @Service
 public class CommodityService {
@@ -52,6 +53,33 @@ public class CommodityService {
     public List<Commodity> Search(String keywords) {
         return commodityDao.findAllByTitleLikeOrIdLike('%' + keywords + '%', '%' + keywords + '%');
     }
+
+	public List<Commodity> searchCommodity(String cname, Integer cno, String cdate) {
+// TODO 自动生成的方法存根
+		List<Commodity> members;
+//		System.out.println("truename是否为null"+member.getTruename().toString());
+		if(!(cname == null || cname.length() <= 0)){ // 输入内容可能为null也可能为空串
+			members = commodityDao.findByTitleLike(cname);
+			if(members.size() != 0){
+				System.out.println("truename"+members);
+				return members;
+			}
+		}else if(cno != null){
+			members = commodityDao.findByCnoLike(cno);
+			if(members.size() != 0){
+				System.out.println("no"+members);
+				return members;
+			}
+		}else if(!(cdate == null || cdate.length() <= 0)){
+			members = commodityDao.findByDateLike(cdate);
+			if(members.size() != 0 || members != null){
+//						System.out.println("phone"+members);
+				return members;
+			}
+		}
+		System.out.println("------------null-------");
+		return null;
+	}
 
 
 

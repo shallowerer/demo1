@@ -14,8 +14,8 @@ import com.huaxianvwa.school.entity.AdminRole;
 import com.huaxianvwa.school.entity.AdminRolePermission;
 
 /**
- * @author Evan
- * @date 2019/11
+ * @author zsj
+ * @date 2020/3
  */
 @Service
 public class AdminPermissionService {

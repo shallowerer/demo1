@@ -1,8 +1,5 @@
 package com.huaxianvwa.school.controller;
-/**
- * @author zsj
- * @date 2020/3
- */
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,29 +13,32 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.huaxianvwa.school.dao.MemberDAO;
+import com.huaxianvwa.school.dao.SupplierDAO;
 import com.huaxianvwa.school.entity.Member;
+import com.huaxianvwa.school.entity.Supplier;
 import com.huaxianvwa.school.result.Result;
 import com.huaxianvwa.school.result.ResultFactory;
-import com.huaxianvwa.school.service.MemberService;
+import com.huaxianvwa.school.service.SupplierService;
 
 @RestController
-public class MemberController {
+public class SupplierContorller {
+
 	@Autowired
-	MemberDAO memberDAO;
+	SupplierDAO supplierDAO;
 	
 	@Autowired
-	MemberService memberService;
+	SupplierService supplierService;
 	
-	
-	@GetMapping("/api/memberInfo")
-	public List<Member> findAll(){
-		return memberDAO.findAll();
+	@GetMapping("/api/findAllSupplier")
+	public List<Supplier> findAll(){
+		return supplierDAO.findAll();
 	}
 	
-	@PostMapping("/api/addMember")
-	 public Result addMember(@RequestBody Member member) {
-        int status = memberService.addMember(member);
+	
+	
+	@PostMapping("/api/addSupplier")
+	 public Result addMember(@RequestBody Supplier member) {
+        int status = supplierService.addSupplier(member);
         switch (status) {
             case 0:
                 return ResultFactory.buildFailResult("真实姓名、电话号码、地址不能为空");
@@ -50,46 +50,45 @@ public class MemberController {
         return ResultFactory.buildFailResult("未知错误");
     }
 	
-	@PutMapping("/api/member/status")
-	public Result updateMemberStatus(@RequestBody Member requestMember) {
-        if (memberService.updateMemberStatus(requestMember)) {
+	@PutMapping("/api/supplier/status")
+	public Result updateMemberStatus(@RequestBody Supplier requestMember) {
+        if (supplierService.updateMemberStatus(requestMember)) {
             return ResultFactory.buildSuccessResult("用户状态更新成功");
         } else {
             return ResultFactory.buildFailResult("参数错误，更新失败");
         }
     }
 
-	@DeleteMapping("/api/member/deleteMember/{id}")
+	@DeleteMapping("/api/supplier/deleteSupplier/{id}")
 	public Result deleteRole(@PathVariable("id") Integer id) {
 		System.out.println(id);
 		try {
-			memberDAO.delete(id);
+			supplierDAO.delete(id);
 		} catch (Exception e) {
 			return ResultFactory.buildSuccessResult("服务器错误");
 		}
         return ResultFactory.buildSuccessResult("删除成功");
     }
 	
-    @PutMapping("/api/member/update")
-    public Result editUser(@RequestBody Member requestMember) {
-    	 if(memberService.editMember(requestMember)) {
+    @PutMapping("/api/supplier/update")
+    public Result editUser(@RequestBody Supplier requestMember) {
+    	 if(supplierService.editMember(requestMember)) {
              return ResultFactory.buildSuccessResult("修改用户信息成功");
          } else {
              return ResultFactory.buildFailResult("参数错误，修改失败");
          }
     }
     
-	@GetMapping("/api/member/paging/{page}/{size}")
-	public Page<Member> paging(@PathVariable("page") Integer page,@PathVariable("size") Integer size){
+	@GetMapping("/api/supplier/paging/{page}/{size}")
+	public Page<Supplier> paging(@PathVariable("page") Integer page,@PathVariable("size") Integer size){
 		PageRequest res = new PageRequest(page, size);
-		return memberDAO.findAll(res);
+		return supplierDAO.findAll(res);
 	}
 	
-	@PostMapping("/api/member/searchInfo")
-	public List<Member> searchInfo(@RequestBody Member requestMember) {
+	@PostMapping("/api/supplier/searchInfo")
+	public List<Supplier> searchInfo(@RequestBody Supplier requestMember) {
 		System.out.println(requestMember);
-		List<Member> members = memberService.searchMember(requestMember);
+		List<Supplier> members = supplierService.searchMember(requestMember);
         return members; 
    }
-
 }

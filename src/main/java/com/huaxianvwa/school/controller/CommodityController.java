@@ -1,6 +1,8 @@
 package com.huaxianvwa.school.controller;
-
-
+/**
+ * @author zsj
+ * @date 2020/3
+ */
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.huaxianvwa.school.dao.CommodityDao;
 import com.huaxianvwa.school.entity.Commodity;
+import com.huaxianvwa.school.entity.Member;
 import com.huaxianvwa.school.repository.CommodityRepository;
 import com.huaxianvwa.school.result.Result;
 import com.huaxianvwa.school.result.ResultFactory;
@@ -77,6 +80,17 @@ public class CommodityController {
             return commodityService.Search(keywords);
         }
     }
+    
+	@GetMapping("/api/commodity/searchInfo")
+	public List<Commodity> searchInfo(@RequestParam("cname") String cname,@RequestParam("cno") Integer cno,@RequestParam("cdate") String cdate) {
+		System.out.println(cname);
+		System.out.println(cno);
+		System.out.println(cdate);
+		List<Commodity> cs = commodityService.searchCommodity(cname,cno,cdate);
+        return cs; 
+   }
+    
+    
 
     @GetMapping("/api/categories/{cid}/commodities")
     public List<Commodity> listByCategory(@PathVariable("cid") int cid) {

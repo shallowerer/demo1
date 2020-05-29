@@ -15,8 +15,8 @@ import com.huaxianvwa.school.entity.AdminUserRole;
 import com.huaxianvwa.school.entity.User;
 
 /**
- * @author Evan
- * @date 2019/10
+ * @author zsj
+ * @date 2020/3
  */
 @Service
 public class AdminMenuService {

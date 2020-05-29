@@ -12,7 +12,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
-
+/**
+ * @author zsj
+ * @date 2020/3
+ */
 @Entity
 @Data
 @Table(name = "commodity")

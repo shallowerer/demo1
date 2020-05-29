@@ -6,10 +6,8 @@ import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Article entity.
- *
- * @author Evan
- * @date 2020/1/14 20:25
+ * @author zsj
+ * @date 2020/3
  */
 @Entity
 @Table(name = "notice_article")

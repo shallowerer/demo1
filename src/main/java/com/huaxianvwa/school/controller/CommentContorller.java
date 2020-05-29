@@ -1,8 +1,5 @@
 package com.huaxianvwa.school.controller;
-/**
- * @author zsj
- * @date 2020/3
- */
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,29 +13,30 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.huaxianvwa.school.dao.MemberDAO;
+import com.huaxianvwa.school.dao.CommentDAO;
+import com.huaxianvwa.school.entity.Comment;
 import com.huaxianvwa.school.entity.Member;
 import com.huaxianvwa.school.result.Result;
 import com.huaxianvwa.school.result.ResultFactory;
-import com.huaxianvwa.school.service.MemberService;
+import com.huaxianvwa.school.service.CommentService;
 
 @RestController
-public class MemberController {
+public class CommentContorller {
 	@Autowired
-	MemberDAO memberDAO;
+	CommentDAO commentDAO;
 	
 	@Autowired
-	MemberService memberService;
+	CommentService commentService;
 	
-	
-	@GetMapping("/api/memberInfo")
-	public List<Member> findAll(){
-		return memberDAO.findAll();
+	@GetMapping("/api/findAllComment")
+	public List<Comment> findAll(){
+		return commentDAO.findAll();
 	}
 	
-	@PostMapping("/api/addMember")
-	 public Result addMember(@RequestBody Member member) {
-        int status = memberService.addMember(member);
+	
+	@PostMapping("/api/addComment")
+	 public Result addComment(@RequestBody Comment member) {
+        int status = commentService.addMember(member);
         switch (status) {
             case 0:
                 return ResultFactory.buildFailResult("真实姓名、电话号码、地址不能为空");
@@ -50,45 +48,45 @@ public class MemberController {
         return ResultFactory.buildFailResult("未知错误");
     }
 	
-	@PutMapping("/api/member/status")
-	public Result updateMemberStatus(@RequestBody Member requestMember) {
-        if (memberService.updateMemberStatus(requestMember)) {
-            return ResultFactory.buildSuccessResult("用户状态更新成功");
-        } else {
-            return ResultFactory.buildFailResult("参数错误，更新失败");
-        }
-    }
+//	@PutMapping("/api/comment/status")
+//	public Result updateMemberStatus(@RequestBody Member requestMember) {
+//        if (commentService.updateMemberStatus(requestMember)) {
+//            return ResultFactory.buildSuccessResult("用户状态更新成功");
+//        } else {
+//            return ResultFactory.buildFailResult("参数错误，更新失败");
+//        }
+//    }
 
-	@DeleteMapping("/api/member/deleteMember/{id}")
+	@DeleteMapping("/api/comment/deleteMember/{id}")
 	public Result deleteRole(@PathVariable("id") Integer id) {
 		System.out.println(id);
 		try {
-			memberDAO.delete(id);
+			commentDAO.delete(id);
 		} catch (Exception e) {
 			return ResultFactory.buildSuccessResult("服务器错误");
 		}
         return ResultFactory.buildSuccessResult("删除成功");
     }
 	
-    @PutMapping("/api/member/update")
-    public Result editUser(@RequestBody Member requestMember) {
-    	 if(memberService.editMember(requestMember)) {
+    @PutMapping("/api/comment/update")
+    public Result editUser(@RequestBody Comment requestMember) {
+    	 if(commentService.editMember(requestMember)) {
              return ResultFactory.buildSuccessResult("修改用户信息成功");
          } else {
              return ResultFactory.buildFailResult("参数错误，修改失败");
          }
     }
     
-	@GetMapping("/api/member/paging/{page}/{size}")
-	public Page<Member> paging(@PathVariable("page") Integer page,@PathVariable("size") Integer size){
+	@GetMapping("/api/comment/paging/{page}/{size}")
+	public Page<Comment> paging(@PathVariable("page") Integer page,@PathVariable("size") Integer size){
 		PageRequest res = new PageRequest(page, size);
-		return memberDAO.findAll(res);
+		return commentDAO.findAll(res);
 	}
 	
-	@PostMapping("/api/member/searchInfo")
-	public List<Member> searchInfo(@RequestBody Member requestMember) {
+	@PostMapping("/api/comment/searchInfo")
+	public List<Comment> searchInfo(@RequestBody Comment requestMember) {
 		System.out.println(requestMember);
-		List<Member> members = memberService.searchMember(requestMember);
+		List<Comment> members = commentService.searchMember(requestMember);
         return members; 
    }
 

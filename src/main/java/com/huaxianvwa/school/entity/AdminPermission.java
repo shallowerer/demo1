@@ -7,8 +7,8 @@ import javax.persistence.*;
 /**
  * Permission entity.
  *
- * @author Evan
- * @date 2019/11
+ * @author zsj
+ * @date 2020/3
  */
 @Entity
 @Table(name = "admin_permission")

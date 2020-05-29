@@ -1,5 +1,8 @@
 package com.huaxianvwa.school;
-
+/**
+ * @author zsj
+ * @date 2020/3
+ */
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;

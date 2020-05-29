@@ -1,5 +1,8 @@
 package com.huaxianvwa.school.config;
-
+/**
+ * @author zsj
+ * @date 2020/3
+ */
 import java.util.List;
 
 import org.springframework.boot.SpringBootConfiguration;

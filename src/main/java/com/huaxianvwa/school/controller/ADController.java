@@ -1,5 +1,8 @@
 package com.huaxianvwa.school.controller;
-
+/**
+ * @author zsj
+ * @date 2020/3
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;

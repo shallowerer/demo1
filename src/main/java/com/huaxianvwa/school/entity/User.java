@@ -11,7 +11,10 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
-
+/**
+ * @author zsj
+ * @date 2020/3
+ */
 @Entity
 @Data
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
