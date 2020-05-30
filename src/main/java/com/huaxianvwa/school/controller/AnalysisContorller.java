@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -153,10 +154,21 @@ public class AnalysisContorller {
 		return orderItemService.oneMemberPianhao(mid);
 	}
 	
-	// 静态数据，按年月日的所有输入
+//	----------------------------------------销售收入-----------------
+	// 静态数据，按年
 	@GetMapping("/api/allShouru")
-	public List<FinanceModel> allShouru(){
-		return financeModelDAO.allShouru();
+	public List<FinanceModel> allShouruOfYear(){
+		return financeModelDAO.allShouruOfYear();
+	}
+	
+	@GetMapping("/api/allShouruOfYearAndMonth")
+	public List<FinanceModel> allShouruOfYearAndMonth(@RequestParam("year") Integer yearInteger,@RequestParam("month")  Integer monthInteger){
+		return financeModelDAO.allShouruByMonth(yearInteger, monthInteger);
+	}
+	
+	@GetMapping("/api/allShouruByYear")
+	public List<FinanceModel> allShouruByYear(@RequestParam("year") Integer yearInteger){
+		return financeModelDAO.allShouruByYear(yearInteger);
 	}
 	
 }
