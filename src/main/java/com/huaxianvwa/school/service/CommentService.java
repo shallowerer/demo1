@@ -1,6 +1,5 @@
 package com.huaxianvwa.school.service;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import org.springframework.web.util.HtmlUtils;
 import com.huaxianvwa.school.dao.CommentDAO;
 import com.huaxianvwa.school.dao.MemberDAO;
 import com.huaxianvwa.school.entity.Comment;
-import com.huaxianvwa.school.entity.Member;
+
 
 @Service
 public class CommentService {
@@ -28,13 +27,14 @@ public class CommentService {
 
 	public int addMember(Comment member) {
 		// TODO 自动生成的方法存根
+		System.out.println(member);
 		Integer servicestar = member.getServicestar();
 		Integer costar = member.getCostar();
 		Integer roomstar = member.getRoomstar();
 		String name = member.getName();
 		String no = member.getNo();
 		String givecontent = member.getGivecontent();
-		Timestamp givetime = member.getGivetime();
+		Date geivtime = new Date();
 		
 		givecontent = HtmlUtils.htmlEscape(givecontent);
 		member.setName(name);
@@ -49,7 +49,7 @@ public class CommentService {
 //        email = HtmlUtils.htmlEscape(email);
         member.setServicestar(servicestar);
         
-        member.setGivetime((Timestamp) new Date());
+        member.setGivetime(geivtime);
         
         // 必要属性为空
         if (no.equals("") || name.equals("") || givecontent.equals("")) {
@@ -80,6 +80,7 @@ public class CommentService {
 //	}
 
 	public boolean editMember(Comment requestMember) {
+//		System.out.println(requestMember);
 //		System.out.println("当前id" + requestMember.getId());
 		Comment memberInDB = commentDAO.findOne(requestMember.getId());
         memberInDB.setServicestar(requestMember.getServicestar());
@@ -88,6 +89,7 @@ public class CommentService {
         memberInDB.setGivecontent(requestMember.getGivecontent());
         memberInDB.setName(requestMember.getName());
         memberInDB.setNo(requestMember.getNo());
+        memberInDB.setGivetime(requestMember.getGivetime());
         try {
         	commentDAO.save(memberInDB);
         } catch (IllegalArgumentException e) {
@@ -100,13 +102,7 @@ public class CommentService {
 		// TODO 自动生成的方法存根
 		List<Comment> members;
 //		System.out.println("truename是否为null"+member.getTruename().toString());
-		if(!(member.getNo() == null || member.getNo().length() <= 0)){ // 输入内容可能为null也可能为空串
-			members = commentDAO.findByNoLike(member.getNo());
-			if(members.size() != 0){
-				System.out.println("truename"+members);
-				return members;
-			}
-		}else if(!(member.getName() == null || member.getName().length() <= 0)){
+		if(!(member.getName() == null || member.getName().length() <= 0)){
 			members = commentDAO.findByNameLike(member.getName());
 			if(members.size() != 0){
 				System.out.println("no"+members);

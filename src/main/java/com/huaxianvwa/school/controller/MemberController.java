@@ -72,6 +72,7 @@ public class MemberController {
 	
     @PutMapping("/api/member/update")
     public Result editUser(@RequestBody Member requestMember) {
+    	System.out.println(requestMember);
     	 if(memberService.editMember(requestMember)) {
              return ResultFactory.buildSuccessResult("修改用户信息成功");
          } else {

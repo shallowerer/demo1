@@ -24,6 +24,16 @@
 	</properties>
  
 	<dependencies>
+	
+		<!-- 阿里巴巴的fastjson库来解析 -->
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>1.2.57</version>
+		</dependency>
+	
+	
+	
 		<!-- 对web开发的支持，包含了spring webmvc和tomcat等web开发的特性 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

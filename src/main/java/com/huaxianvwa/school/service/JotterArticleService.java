@@ -1,6 +1,8 @@
 package com.huaxianvwa.school.service;
 
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +32,8 @@ public class JotterArticleService {
     }
 
     public boolean addOrUpdate(JotterArticle article) {
+    	Date nowDate = new Date();
+    	article.setArticleDate(nowDate);
         try {
             jotterArticleDAO.save(article);
         } catch (IllegalArgumentException e) {

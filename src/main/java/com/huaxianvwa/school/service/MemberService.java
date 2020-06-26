@@ -31,6 +31,15 @@ public class MemberService {
 		String phone = member.getPhone();
 		String email = member.getEmail();
 		
+		String province = member.getProvince();
+		String city = member.getCity();
+		String area = member.getArea();
+		String town = member.getTown();
+		String road = member.getRoad();
+		String myfloor = member.getMyfloor();
+		String sex = member.getSex();
+		Integer age = member.getAge();
+		
 		membername = HtmlUtils.htmlEscape(membername);
 		member.setMembername(membername);
 		memberaddr = HtmlUtils.htmlEscape(memberaddr);
@@ -43,6 +52,17 @@ public class MemberService {
         member.setPhone(phone);
         email = HtmlUtils.htmlEscape(email);
         member.setEmail(email);
+        
+        
+        member.setProvince(province);
+        member.setCity(city);
+        member.setArea(area);
+        member.setTown(town);
+        member.setRoad(road);
+        member.setMyfloor(myfloor);
+        member.setSex(sex);
+        member.setAge(age);
+        
         member.setEnabled(true);
         
         // 必要属性为空
@@ -82,6 +102,17 @@ public class MemberService {
         memberInDB.setPhone(requestMember.getPhone());
         memberInDB.setEmail(requestMember.getEmail());
         memberInDB.setMemberaddr(requestMember.getMemberaddr());
+        
+        memberInDB.setProvince(requestMember.getProvince());
+        memberInDB.setCity(requestMember.getCity());
+        memberInDB.setArea(requestMember.getArea());
+        memberInDB.setTown(requestMember.getTown());
+        memberInDB.setRoad(requestMember.getRoad());
+        memberInDB.setMyfloor(requestMember.getMyfloor());
+        memberInDB.setSex(requestMember.getSex());
+        memberInDB.setAge(requestMember.getAge());
+        memberInDB.setAccount(requestMember.getAccount());
+        memberInDB.setPassword(requestMember.getPassword());
         try {
         	memberDAO.save(memberInDB);
         } catch (IllegalArgumentException e) {

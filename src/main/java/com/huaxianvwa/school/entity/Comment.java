@@ -1,6 +1,6 @@
 package com.huaxianvwa.school.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,55 +28,72 @@ public class Comment {
 	private String name;
 	
 	@JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
-	private Timestamp givetime;
+	private Date givetime;
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Integer getServicestar() {
 		return servicestar;
 	}
+
 	public void setServicestar(Integer servicestar) {
 		this.servicestar = servicestar;
 	}
+
 	public Integer getCostar() {
 		return costar;
 	}
+
 	public void setCostar(Integer costar) {
 		this.costar = costar;
 	}
+
 	public Integer getRoomstar() {
 		return roomstar;
 	}
+
 	public void setRoomstar(Integer roomstar) {
 		this.roomstar = roomstar;
 	}
+
 	public String getGivecontent() {
 		return givecontent;
 	}
+
 	public void setGivecontent(String givecontent) {
 		this.givecontent = givecontent;
 	}
+
 	public String getNo() {
 		return no;
 	}
+
 	public void setNo(String no) {
 		this.no = no;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Timestamp getGivetime() {
+
+	public Date getGivetime() {
 		return givetime;
 	}
-	public void setGivetime(Timestamp givetime) {
+
+	public void setGivetime(Date givetime) {
 		this.givetime = givetime;
 	}
+
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", servicestar=" + servicestar + ", costar=" + costar + ", roomstar=" + roomstar

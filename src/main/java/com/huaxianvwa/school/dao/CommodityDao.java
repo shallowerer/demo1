@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.huaxianvwa.school.entity.Category;
 import com.huaxianvwa.school.entity.Commodity;
-import com.huaxianvwa.school.entity.Member;
 
 public interface CommodityDao extends JpaRepository<Commodity, Integer>{
 	List<Commodity> findAllByCategory(Category category);

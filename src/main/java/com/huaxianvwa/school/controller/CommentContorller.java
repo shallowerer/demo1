@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.huaxianvwa.school.dao.CommentDAO;
 import com.huaxianvwa.school.entity.Comment;
-import com.huaxianvwa.school.entity.Member;
 import com.huaxianvwa.school.result.Result;
 import com.huaxianvwa.school.result.ResultFactory;
 import com.huaxianvwa.school.service.CommentService;

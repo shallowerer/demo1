@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.huaxianvwa.school.dao.SupplierDAO;
-import com.huaxianvwa.school.entity.Member;
 import com.huaxianvwa.school.entity.Supplier;
 import com.huaxianvwa.school.result.Result;
 import com.huaxianvwa.school.result.ResultFactory;
@@ -38,6 +37,7 @@ public class SupplierContorller {
 	
 	@PostMapping("/api/addSupplier")
 	 public Result addMember(@RequestBody Supplier member) {
+//		System.out.println(member);	
         int status = supplierService.addSupplier(member);
         switch (status) {
             case 0:
@@ -52,6 +52,7 @@ public class SupplierContorller {
 	
 	@PutMapping("/api/supplier/status")
 	public Result updateMemberStatus(@RequestBody Supplier requestMember) {
+		System.out.println(requestMember);
         if (supplierService.updateMemberStatus(requestMember)) {
             return ResultFactory.buildSuccessResult("用户状态更新成功");
         } else {
@@ -72,6 +73,7 @@ public class SupplierContorller {
 	
     @PutMapping("/api/supplier/update")
     public Result editUser(@RequestBody Supplier requestMember) {
+    	System.out.println(requestMember);
     	 if(supplierService.editMember(requestMember)) {
              return ResultFactory.buildSuccessResult("修改用户信息成功");
          } else {

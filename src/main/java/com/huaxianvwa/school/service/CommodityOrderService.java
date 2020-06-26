@@ -1,6 +1,6 @@
 package com.huaxianvwa.school.service;
 
-import java.sql.Timestamp;
+
 import java.util.Date;
 import java.util.List;
 
@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
+
 import com.huaxianvwa.school.dao.CommodityOrderDAO;
-import com.huaxianvwa.school.dao.MemberDAO;
-import com.huaxianvwa.school.entity.Commodity;
+
 import com.huaxianvwa.school.entity.CommodityOrder;
-import com.huaxianvwa.school.entity.Member;
+
 
 @Service
 public class CommodityOrderService {
@@ -31,9 +31,9 @@ public class CommodityOrderService {
 		Integer mid = member.getMid();
 		Float totalPrice = member.getTotalPrice();
 		Date orderTime = new Date();
-		String status = member.getStatus();
-		String addr = member.getStatus();
-		String payStatus = member.getStatus();
+		String status = "已完成";
+		String addr = member.getAddress();
+		String payStatus = member.getPayStatus();
 			
 		Integer uid = 1;
 		
@@ -92,6 +92,7 @@ public class CommodityOrderService {
 	public boolean editMember(CommodityOrder requestMember) {
 //		System.out.println("当前id" + requestMember.getId());
 		CommodityOrder memberInDB = commodityOrderDAO.findOne(requestMember.getId());
+		memberInDB.setUid(requestMember.getUid());
         memberInDB.setOrderNo(requestMember.getOrderNo());
         memberInDB.setAddress(requestMember.getAddress());
         memberInDB.setMid(requestMember.getMid());
@@ -106,32 +107,25 @@ public class CommodityOrderService {
         return true;
     }
 
-//	public List<CommodityOrder> searchMember(CommodityOrder member) {
-//		// TODO 自动生成的方法存根
-//		List<CommodityOrder> members;
-////		System.out.println("truename是否为null"+member.getTruename().toString());
-//		if(!(member.getMid() == null || member.getMid().length() <= 0)){ // 输入内容可能为null也可能为空串
-//			members = commodityOrderDAO.findByTruenameLike(member.getTruename());
-//			if(members.size() != 0){
-//				System.out.println("truename"+members);
-//				return members;
-//			}
-//		}else if(!(member.getMemberno() == null || member.getMemberno().length() <= 0)){
-//			members = commodityOrderDAO.findByMembernoLike(member.getMemberno());
-//			if(members.size() != 0){
-//				System.out.println("no"+members);
-//				return members;
-//			}
-//		}else if(!(member.getPhone() == null || member.getPhone().length() <= 0)){
-//			members = commodityOrderDAO.findByPhoneLike(member.getPhone());
-//			System.out.println(member.getPhone());
-//			if(members.size() != 0 || members != null){
-////				System.out.println("phone"+members);
-//				return members;
-//			}
-//		}
-//		System.out.println("------------null-------");
-//		return null;
-//	}
-//	
+	public List<CommodityOrder> searchMember(String orderTime, String address) {
+		// TODO 自动生成的方法存根
+
+		List<CommodityOrder> members;
+//		System.out.println("truename是否为null"+member.getTruename().toString());
+		if(!(address == null || address.length() <= 0)){
+			members = commodityOrderDAO.findByAddressLike(address);
+			if(members.size() != 0){
+				return members;
+			}
+		}else if(!(orderTime == null || orderTime.length() <= 0)){
+			members = commodityOrderDAO.findByOrderTimeLike(orderTime);
+			if(members.size() != 0 || members != null){
+//				System.out.println("phone"+members);
+				return members;
+			}
+		}
+		System.out.println("------------null-------");
+		return null;
+	}
+	
 }

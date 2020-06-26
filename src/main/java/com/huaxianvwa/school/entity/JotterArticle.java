@@ -1,9 +1,12 @@
 package com.huaxianvwa.school.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Date;
+
 import javax.persistence.*;
-import java.sql.Date;
+
 
 /**
  * Article entity.
@@ -48,6 +51,7 @@ public class JotterArticle {
     /**
      * Article release date.
      */
+	@JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
     private Date articleDate;
 
     public int getId() {
@@ -105,4 +109,13 @@ public class JotterArticle {
     public void setArticleDate(Date articleDate) {
         this.articleDate = articleDate;
     }
+
+	@Override
+	public String toString() {
+		return "JotterArticle [id=" + id + ", articleTitle=" + articleTitle + ", articleContentHtml="
+				+ articleContentHtml + ", articleContentMd=" + articleContentMd + ", articleAbstract=" + articleAbstract
+				+ ", articleCover=" + articleCover + ", articleDate=" + articleDate + "]";
+	}
+    
+    
 }

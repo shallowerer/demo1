@@ -3,30 +3,25 @@ package com.huaxianvwa.school.controller;
  * @author zsj
  * @date 2020/3
  */
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.map.HashedMap;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityAuthorizeMode;
-import org.springframework.stereotype.Controller;
+
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.RestController;
 
-import com.huaxianvwa.school.dao.UserDao;
+
 import com.huaxianvwa.school.entity.User;
 
 import com.huaxianvwa.school.result.Result;

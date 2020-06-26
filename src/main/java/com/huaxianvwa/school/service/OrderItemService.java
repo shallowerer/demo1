@@ -1,14 +1,16 @@
 package com.huaxianvwa.school.service;
 
-import static org.mockito.Matchers.intThat;
+
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
@@ -18,6 +20,7 @@ import com.huaxianvwa.school.dao.FinanceModelDAO;
 import com.huaxianvwa.school.dao.MemberDAO;
 import com.huaxianvwa.school.dao.OrderItemDAO;
 import com.huaxianvwa.school.dao.PreferenceModelDAO;
+
 import com.huaxianvwa.school.entity.Commodity;
 import com.huaxianvwa.school.entity.CommodityOrder;
 import com.huaxianvwa.school.entity.Member;
@@ -47,21 +50,36 @@ public class OrderItemService {
 	
 	// 二元关联
 	public Map<String, String> getTwoAssociationAnalysis(int item1Id, int item2Id){
-		Map<String, String> dataMap = new HashedMap();
-		int size = commodityOrderDAO.findAll().size();
-//		System.out.println(size);
+		Map<String, String> dataMap = new HashMap<String, String>();
+		List<CommodityOrder> orderList = commodityOrderDAO.findAll();
+		int size = orderList.size();
+		// 同时被买出现次数
 		int count = 0;
-		for(int i = 0; i <= size; i++){
-			if(orderItemDAO.getAssociationAnalysis(item1Id, item2Id, i).size() == 2){
+		for(int i = 0; i < size; i++){
+			if(orderItemDAO.getAssociationAnalysis(item1Id, item2Id, orderList.get(i).getId()).size() == 2){
 				count++;
 			}
 		}
+		
+		//出现1 + 出现2 总次数
+		int allFrequency = 0;
+		allFrequency = orderItemDAO.frequency(item1Id) + orderItemDAO.frequency(item1Id);
+		// 项集 = 出现1 + 出现2 - 出现1、2
+		int itemSet = allFrequency - count;
+		float c = (float)count/(float)itemSet;
 		float p = (float)count/(float)size;
 		dataMap.put("count", count+"");
 		dataMap.put("size", size+"");
 		
-		// 关联度
+		// 支持度：二者同时被买占总事务概率
 		dataMap.put("p",String.format("%.2f",p));
+		System.out.println(Double.isNaN(c));
+
+		c = (float) (Double.isNaN(c)?0.00:c);
+		// 置信度：二者同时被买占总事务概率
+		dataMap.put("c",String.format("%.2f",c));
+		
+
 		return dataMap;
 	}
 	
@@ -347,9 +365,30 @@ public class OrderItemService {
 			
 			return list;
 		}
-	
 		
-	
+		
+//	--------------------------群体偏好	------------------------------
+//		组合偏好Combination
+//		@SuppressWarnings("unused")
+//		public List<PreferenceModel> pianhaoOfCombination(String sex, Integer age1, Integer age2, String province, String city, String area){
+//			List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();	
+//			
+//			Member members = memberDAO.getOne(mid);
+//			Map<String, Object> map = new HashMap();
+//			
+//			List<PreferenceModel> preferenceModels = preferenceModelDAO.getPreference(mid);
+//			map.put("memberlove",preferenceModels);
+//			map.put("menberInfo",members);
+//			list.add(map);
+//			
+//			return list;
+//		}
+//		
+		
+		
+		
+		
+//  -------------------------销售数据------------------------
 	// 销售数据汇总
 	public Map<String, String> getAllStaticData(){
 		Map<String, String> map = new HashMap();
@@ -434,7 +473,59 @@ public class OrderItemService {
     }
 
 	
-//-----------------------------------------------------------------------------------	
+//-----------------------------------订单明细表设置------------------------------------------------
+	
+	
+	 public List<OrderItem> list() {
+	        Sort sort = new Sort(Sort.Direction.DESC, "id");
+	        return orderItemDAO.findAll(sort);
+	    }
+
+	    public boolean addOrUpdate(OrderItem orderItem) {
+	        try {
+	        	orderItemDAO.save(orderItem);
+	        } catch (IllegalArgumentException e) {
+	            return false;
+	        }
+	        return true;
+	    }
+
+	    public boolean deleteById(int id) {
+	        try {
+	        	orderItemDAO.delete(id);
+	        } catch (IllegalArgumentException e) {
+	            return false;
+	        }
+	        return true;
+	    }
+
+//	    public List<OrderItem> listByCategory(int cid) {
+//	        Category category = categoryService.get(cid);
+//	        Sort sort = new Sort(Sort.Direction.DESC, "id");
+//	        return commodityDao.findAllByCategory(category);
+//	    }
+
+	    public List<OrderItem> searchMember(OrderItem member) {
+			// TODO 自动生成的方法存根
+			List<OrderItem> members;
+//			System.out.println("truename是否为null"+member.getTruename().toString());
+			if(!(member.getCommodityName() == null || member.getCommodityName().length() <= 0)){
+				members = orderItemDAO.findByCommodityNameLike(member.getCommodityName());
+				if(members.size() != 0){
+					return members;
+				}
+			}
+//			else if(!(member.getCommodityOrder().getOrderNo() == null || member.getCommodityOrder().getOrderNo().toString().length() <= 0)){
+//				members = orderItemDAO.findByOrderNoLike(member.getCommodityOrder().getOrderNo());
+//				if(members.size() != 0 || members != null){
+////					System.out.println("phone"+members);
+//					return members;
+//				}
+//			}
+			System.out.println("------------null-------");
+			return null;
+		}
+	
 	
 	
 }

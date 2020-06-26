@@ -30,13 +30,10 @@ public class AdminMenuService {
     AdminRoleMenuService adminRoleMenuService;
 
     public List<AdminMenu> getAllByParentId(int parentId) {return adminMenuDAO.findAllByParentId(parentId);}
-
     public List<AdminMenu> getMenusByCurrentUser() {
         String username = SecurityUtils.getSubject().getPrincipal().toString();
-        
         User user = userService.findByUsername(username);
-        List<AdminUserRole> userRoleList = adminUserRoleService.listAllByUid(user.getId());
-       
+        List<AdminUserRole> userRoleList = adminUserRoleService.listAllByUid(user.getId());       
         List<AdminMenu> menus = new ArrayList<>();
         for (AdminUserRole userRole : userRoleList) {
 //        	  System.out.println(userRole.getRid());

@@ -26,6 +26,7 @@ public class ADController {
 
     @PostMapping("api/admin/content/article")
     public Result saveArticle(@RequestBody JotterArticle article) {
+    	System.out.println(article);
         if(jotterArticleService.addOrUpdate(article)) {
             return ResultFactory.buildSuccessResult("保存成功");
         }

@@ -33,22 +33,15 @@ public class Commodity {
 	private String title;
 	private String abs;
 	private String sellPrice;
+	private String originPrice;
 	private String cover;
 	private String date;
 	private Integer cno;
-	
-    public Category getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-	
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
 	}
 	public Integer getId() {
 		return id;
@@ -68,17 +61,29 @@ public class Commodity {
 	public void setAbs(String abs) {
 		this.abs = abs;
 	}
+	public String getSellPrice() {
+		return sellPrice;
+	}
+	public void setSellPrice(String sellPrice) {
+		this.sellPrice = sellPrice;
+	}
+	public String getOriginPrice() {
+		return originPrice;
+	}
+	public void setOriginPrice(String originPrice) {
+		this.originPrice = originPrice;
+	}
 	public String getCover() {
 		return cover;
 	}
 	public void setCover(String cover) {
 		this.cover = cover;
 	}
-	public String getSellPrice() {
-		return sellPrice;
+	public String getDate() {
+		return date;
 	}
-	public void setSellPrice(String sellPrice) {
-		this.sellPrice = sellPrice;
+	public void setDate(String date) {
+		this.date = date;
 	}
 	public Integer getCno() {
 		return cno;
@@ -86,14 +91,7 @@ public class Commodity {
 	public void setCno(Integer cno) {
 		this.cno = cno;
 	}
-	@Override
-	public String toString() {
-		return "Commodity [category=" + category + ", id=" + id + ", title=" + title + ", abs=" + abs + ", sellPrice="
-				+ sellPrice + ", cover=" + cover + ", date=" + date + ", cno=" + cno + "]";
-	}
-
-
-
 	
+   
 
 }

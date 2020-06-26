@@ -14,15 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.huaxianvwa.school.dao.CommodityDao;
 import com.huaxianvwa.school.entity.Commodity;
-import com.huaxianvwa.school.entity.Member;
 import com.huaxianvwa.school.repository.CommodityRepository;
 import com.huaxianvwa.school.result.Result;
 import com.huaxianvwa.school.result.ResultFactory;
@@ -36,8 +33,6 @@ public class CommodityController {
 	@Autowired
 	private CommodityService commodityService;
 	
-	@Autowired
-	private CommodityDao commodityDao;
 
 //	@Autowired
 //	private BaseDao baseDao;
@@ -83,9 +78,9 @@ public class CommodityController {
     
 	@GetMapping("/api/commodity/searchInfo")
 	public List<Commodity> searchInfo(@RequestParam("cname") String cname,@RequestParam("cno") Integer cno,@RequestParam("cdate") String cdate) {
-		System.out.println(cname);
-		System.out.println(cno);
-		System.out.println(cdate);
+//		System.out.println(cname);
+//		System.out.println(cno);
+//		System.out.println(cdate);
 		List<Commodity> cs = commodityService.searchCommodity(cname,cno,cdate);
         return cs; 
    }

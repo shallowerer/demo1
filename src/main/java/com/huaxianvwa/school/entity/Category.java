@@ -20,22 +20,34 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     int id;
-
-    String name;
+    private String cover;
+    private String name;
+    private String desc;
     private boolean enabled;
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -44,9 +56,10 @@ public class Category {
 	}
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", enabled=" + enabled + "]";
+		return "Category [id=" + id + ", cover=" + cover + ", name=" + name + ", desc=" + desc + ", enabled=" + enabled
+				+ "]";
 	}
-
+	
     
     
 }

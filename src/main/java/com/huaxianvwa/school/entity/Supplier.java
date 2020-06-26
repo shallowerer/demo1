@@ -12,11 +12,11 @@ public class Supplier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
 	private Integer id;
-	private String name;
-	private String addr;
 	private String no;
+	private String name;
 	private String phone;
 	private String email;
+	private String addr;
 	private Boolean enabled;
 	public Integer getId() {
 		return id;
@@ -24,23 +24,17 @@ public class Supplier {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getAddr() {
-		return addr;
-	}
-	public void setAddr(String addr) {
-		this.addr = addr;
-	}
 	public String getNo() {
 		return no;
 	}
 	public void setNo(String no) {
 		this.no = no;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getPhone() {
 		return phone;
@@ -54,6 +48,12 @@ public class Supplier {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
 	public Boolean getEnabled() {
 		return enabled;
 	}
@@ -62,9 +62,9 @@ public class Supplier {
 	}
 	@Override
 	public String toString() {
-		return "Supplier [id=" + id + ", name=" + name + ", addr=" + addr + ", no=" + no + ", phone=" + phone
-				+ ", email=" + email + ", enabled=" + enabled + "]";
+		return "Supplier [id=" + id + ", no=" + no + ", name=" + name + ", phone=" + phone + ", email=" + email
+				+ ", addr=" + addr + ", enabled=" + enabled + "]";
 	}
-	
+
 	
 }

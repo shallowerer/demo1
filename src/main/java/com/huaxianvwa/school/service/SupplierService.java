@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
-import com.huaxianvwa.school.dao.MemberDAO;
 import com.huaxianvwa.school.dao.SupplierDAO;
-import com.huaxianvwa.school.entity.Member;
 import com.huaxianvwa.school.entity.Supplier;
 
 @Service
@@ -23,7 +21,7 @@ public class SupplierService {
 
 	public int addSupplier(Supplier member) {
 		// TODO 自动生成的方法存根
-
+//		System.out.println(member);
 		String addr = member.getAddr();
 		String no = member.getNo();
 		String name = member.getName();
@@ -90,6 +88,7 @@ public class SupplierService {
 
 	public List<Supplier> searchMember(Supplier member) {
 		// TODO 自动生成的方法存根
+		System.out.println(member.getName());
 		List<Supplier> members;
 //		System.out.println("truename是否为null"+member.getTruename().toString());
 		if(!(member.getName() == null || member.getName().length() <= 0)){ // 输入内容可能为null也可能为空串

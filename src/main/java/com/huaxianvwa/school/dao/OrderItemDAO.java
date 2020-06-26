@@ -4,15 +4,32 @@ import java.util.List;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.huaxianvwa.school.entity.OrderItem;
 import com.huaxianvwa.school.entity.PreferenceModel;
 
 public interface OrderItemDAO extends JpaRepository<OrderItem, Integer>{
+//	--------------模糊查询
+//	@Query(value = "from OrderItem m where m.order_no like %?1%")
+//	public List<OrderItem> findByOrderNoLike(Integer orderNo);
+	
+	@Query(value = "from OrderItem m where m.commodityName like %?1%")
+	public List<OrderItem> findByCommodityNameLike(String commodityName);
+//	--------------分析
+	
+	
+	
 	// 二连关联分析
 	@Query(value = "select * from order_item o where commodity_id in(?1,?2) and order_id = ?3",nativeQuery = true)
 	public List<OrderItem> getAssociationAnalysis(int item1Id, int item2Id, int orderId);
+	
+	// 出现次数
+	@Query(value = "select count(*) from order_item o where commodity_id =?1",nativeQuery = true)
+	public Integer frequency(int itemId);
+	
 	
 	//偏好
 	@Query(value = "select count(*) as times, z.commodity_name, z.commodity_id,z.price from order_item z where  order_id in ( select id from commodity_order where mid = 2 ) group by commodity_id  ",nativeQuery = true)
@@ -100,6 +117,17 @@ public interface OrderItemDAO extends JpaRepository<OrderItem, Integer>{
 //	某个会员在所有订单购买某商品次数
 	@Query(value = "select count(*) from commodity_order where  mid = ?1 )",nativeQuery = true)
 	public Integer getCountByMemberIdOfBuyForOrder(int memberId);
+
+	@Transactional
+	@Modifying
+	@Query(value = "delete from order_item where order_id in (?1)",nativeQuery = true)
+	public void deleteOrderByOrderId(Integer id);
+
+
+
+
+
+
 	
 	
 }
